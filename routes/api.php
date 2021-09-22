@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post( '/v1/login', [AuthController::class, 'login'] );
+
+Route::middleware('auth:sanctum')->group( function() {
+
+    $sApiBase = Config( 'flexidb.API_URI_BASE' );
+
+    #region User-management
+    Route::post( $sApiBase . 'register', [AuthController::class, 'createUser'] );
+    Route::post( $sApiBase . 'logout', [AuthController::class, 'logout'] );
+    #endregion
+
+} );
