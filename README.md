@@ -6,12 +6,12 @@ _When connecting straight to a database isn't an option_
 Multiple calls:
 ```json
 {
-  [
-    { "create table" },
-    { "seed with basic data, insert admins" },
-    ...
-    { "read data" }
-  ]
+    "actions": [
+        { "create table" },
+        { "seed with basic data, insert admins" },
+        ...
+        { "read data" }
+    ]
 }
 ```
 
@@ -23,11 +23,15 @@ Calls supported:
     "fields": [
         { 
             "name": "id",
-            "type": "integer"
+            "type": "integer",
+            "nullable": true,
+            "autoinc": true
         },
         {
             "name": "name",
-            "type": "string"
+            "type": "string",
+            "length": 40,
+            "nullable": true
         },
         {
             "name": "role",
@@ -46,8 +50,7 @@ Calls supported:
             "default": "now"
         }
     ],
-    "key": "id",
-    "autoincrement": "id"
+    "key": "id"
 }
 
 {

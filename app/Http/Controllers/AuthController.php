@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class AuthController extends Controller
-{
+class AuthController extends Controller {
 
     public function createUser( Request $oRequest ) {
         if( !$oRequest->user()->tokenCan('user-create') ) {
