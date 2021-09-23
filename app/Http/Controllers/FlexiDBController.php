@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\FlexiDB\Parser;
+use App\VQL\VQLParser;
 
 class FlexiDBController extends Controller {
 
@@ -13,14 +13,9 @@ class FlexiDBController extends Controller {
                 'message' => 'Invalid structure'
             ], 400 );
         }
-        $aActions = request( 'actions' );
-        if( !empty($aActions) && is_array($aActions) ) {
-            $oQueryBuilder = new \App\FlexiDB\QueryBuilder();
-            foreach( $aActions as $aAction ) {
-                $oQueryBuilder->setParams( $aAction );
-                $oQueryBuilder->buildTableSQL( 1 );
-            }
-        }
+        $oParser = new VQLParser();
+        $oParser->setRequest( $oRequest );
+        return $oParser->parse();
     }
 
 

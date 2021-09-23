@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -99,6 +100,14 @@ class AuthController extends Controller {
         return response()->json( [
             'message' => ""
         ], ( $bResult ? 200 : 400 ) );
+    }
+
+    public function userTables( Request $oRequest ) {
+        $oUser = $oRequest->user();
+        $aTables = UserTables::where( 'user_id', $oUser->id )->get();
+        return response()->json( [
+            'message' => $aTables
+        ], 200 );
     }
 
 }

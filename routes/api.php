@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->group( function() {
     #region User-management
     Route::post( $sApiBase . 'register', [AuthController::class, 'createUser'] );
     Route::post( $sApiBase . 'logout', [AuthController::class, 'logout'] );
+    Route::get( $sApiBase . 'tables', [AuthController::class, 'userTables'] );
     #endregion
 
     Route::post( $sApiBase . 'data', [FlexiDBController::class, 'parseRequest'] );
